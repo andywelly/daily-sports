@@ -3,7 +3,7 @@ import axios from 'axios';
 import { useState } from 'react';
 
 // Define the types
-interface SportsBookOdds {
+interface BookOdds {
   totalUnder: string;
   totalOver: string;
   totalUnderOdds: string;
@@ -20,11 +20,19 @@ interface Game {
   gameID: string;
   last_updated_e_time: string;
   gameDate: string;
-  teamIDHome: string;
-  teamIDAway: string;
-  homeTeam: string;
-  awayTeam: string;
-  [key: string]: any; // To accommodate sportbooks directly at this level
+  teamIDHome?: string;
+  teamIDAway?: string;
+  homeTeam?: string;
+  awayTeam?: string;
+  ballybet?: BookOdds;
+  bet365?: BookOdds;
+  betmgm?: BookOdds;
+  betrivers?: BookOdds;
+  caesars_sportsbook?: BookOdds;
+  draftkings?: BookOdds;
+  espnbet?: BookOdds;
+  fanduel?: BookOdds;
+  [key: string]: BookOdds | string | undefined;
 }
 
 interface ApiResponse {
@@ -119,14 +127,16 @@ export default function Home() {
     ];
 
     sportsbooks.forEach(bookName => {
-      if (game[bookName] && game[bookName].totalUnder) {
-        const underValue = parseFloat(game[bookName].totalUnder);
+      const book = game[bookName] as BookOdds | undefined;
+      
+      if (book && book.totalUnder) {
+        const underValue = parseFloat(book.totalUnder);
 
         // Find highest line
         if (!isNaN(underValue) && underValue > parseFloat(highest.value)) {
           highest = {
-            value: game[bookName].totalUnder,
-            odds: game[bookName].totalUnderOdds,
+            value: book.totalUnder,
+            odds: book.totalUnderOdds,
             sportsbook: bookName
           };
         }
@@ -134,8 +144,8 @@ export default function Home() {
         // Find lowest line
         if (!isNaN(underValue) && underValue < parseFloat(lowest.value)) {
           lowest = {
-            value: game[bookName].totalUnder,
-            odds: game[bookName].totalUnderOdds,
+            value: book.totalUnder,
+            odds: book.totalUnderOdds,
             sportsbook: bookName
           };
         }
