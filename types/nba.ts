@@ -57,9 +57,7 @@ export interface BookOdds {
     'ballybet', 'bet365', 'betmgm', 'betrivers', 'caesars_sportsbook',
     'draftkings', 'espnbet', 'fanduel'
   ];
-  
-  // Map of NBA team names to their codes
-  // Some teams have different codes on Basketball Reference
+
   export const NBA_TEAM_CODES: Record<string, TeamCodeInfo> = {
     'Hawks': { code: 'ATL', basketball_reference_code: 'ATL', full_name: 'Atlanta Hawks' },
     'Celtics': { code: 'BOS', basketball_reference_code: 'BOS', full_name: 'Boston Celtics' },
@@ -79,7 +77,7 @@ export interface BookOdds {
     'Heat': { code: 'MIA', basketball_reference_code: 'MIA', full_name: 'Miami Heat' },
     'Bucks': { code: 'MIL', basketball_reference_code: 'MIL', full_name: 'Milwaukee Bucks' },
     'Timberwolves': { code: 'MIN', basketball_reference_code: 'MIN', full_name: 'Minnesota Timberwolves' },
-    'Pelicans': { code: 'NOP', basketball_reference_code: 'NOP', full_name: 'New Orleans Pelicans' },
+    'Pelicans': { code: 'NO', basketball_reference_code: 'NO', full_name: 'New Orleans Pelicans' },
     'Knicks': { code: 'NYK', basketball_reference_code: 'NYK', full_name: 'New York Knicks' },
     'Thunder': { code: 'OKC', basketball_reference_code: 'OKC', full_name: 'Oklahoma City Thunder' },
     'Magic': { code: 'ORL', basketball_reference_code: 'ORL', full_name: 'Orlando Magic' },

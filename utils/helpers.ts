@@ -58,38 +58,24 @@ export const getTodayDateUS = (): string => {
   return `${year}${month}${day}`;
 };
 
-/**
- * Get team info from team name
- */
-export const getTeamInfo = (teamName: string): TeamCodeInfo | null => {
-  // Check if we have a direct match in our mapping
-  const directMatch = NBA_TEAM_CODES[teamName];
-  if (directMatch) {
-    return directMatch;
-  }
-  
-  // If not, try to find by partial name match
-  for (const [key, info] of Object.entries(NBA_TEAM_CODES)) {
-    if (
-      teamName.includes(key) || 
-      key.includes(teamName) || 
-      teamName.includes(info.full_name) || 
-      info.full_name.includes(teamName)
-    ) {
+
+export const getTeamInfo = (teamCode: string): TeamCodeInfo | null => {
+  if (!teamCode) return null;
+
+  // Normalize the team code for case-insensitive matching
+  const normalizedTeamCode = teamCode.trim().toUpperCase();
+
+  // Find the team info in NBA_TEAM_CODES
+  for (const [, info] of Object.entries(NBA_TEAM_CODES)) {
+    if (info.code === normalizedTeamCode) {
       return info;
     }
   }
-  
-  // Check for specific nicknames that might not match directly
-  if (teamName.includes('Sixers')) {
-    return NBA_TEAM_CODES['76ers'];
-  }
-  if (teamName.includes('Blazers')) {
-    return NBA_TEAM_CODES['Trail Blazers'];
-  }
-  
+
+  // If no match is found, return null
   return null;
 };
+  
 
 /**
  * Generate Basketball Reference team page URL
