@@ -37,7 +37,6 @@ export default function Home() {
       if (dateToFetch) {
         setDate(dateToFetch);
       }
-      console.log(response)
     } catch (error) {
       console.error('Error fetching data:', error);
       

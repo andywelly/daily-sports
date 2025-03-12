@@ -77,7 +77,7 @@ export interface BookOdds {
     'Heat': { code: 'MIA', basketball_reference_code: 'MIA', full_name: 'Miami Heat' },
     'Bucks': { code: 'MIL', basketball_reference_code: 'MIL', full_name: 'Milwaukee Bucks' },
     'Timberwolves': { code: 'MIN', basketball_reference_code: 'MIN', full_name: 'Minnesota Timberwolves' },
-    'Pelicans': { code: 'NO', basketball_reference_code: 'NO', full_name: 'New Orleans Pelicans' },
+    'Pelicans': { code: 'NO', basketball_reference_code: 'NOP', full_name: 'New Orleans Pelicans' },
     'Knicks': { code: 'NYK', basketball_reference_code: 'NYK', full_name: 'New York Knicks' },
     'Thunder': { code: 'OKC', basketball_reference_code: 'OKC', full_name: 'Oklahoma City Thunder' },
     'Magic': { code: 'ORL', basketball_reference_code: 'ORL', full_name: 'Orlando Magic' },
