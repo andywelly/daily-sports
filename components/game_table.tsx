@@ -1,6 +1,10 @@
 import React from 'react';
 import { Game } from '../types/nba';
-import { formatDate, parseGameInfo } from '../utils/helpers';
+import { 
+  formatDate, 
+  parseGameInfo, 
+  getTeamInfo
+} from '../utils/helpers';
 import { OddsService } from '../services/odds_services';
 
 interface GameTableProps {
@@ -13,6 +17,9 @@ const GameTable: React.FC<GameTableProps> = ({ games, date }) => {
     return <p className="text-gray-700">No games found for this date.</p>;
   }
 
+  // Get current year for team pages
+  const currentYear = new Date().getFullYear();
+
   return (
     <div className="overflow-x-auto">
       <h2 className="text-xl font-semibold mb-2">
@@ -22,6 +29,7 @@ const GameTable: React.FC<GameTableProps> = ({ games, date }) => {
         <thead>
           <tr className="bg-gray-100">
             <th className="px-4 py-2 text-left border-b">Game</th>
+            <th className="px-4 py-2 text-center border-b">Teams</th>
             <th className="px-4 py-2 text-center border-b">Highest Line</th>
             <th className="px-4 py-2 text-center border-b">Lowest Line</th>
           </tr>
@@ -32,6 +40,10 @@ const GameTable: React.FC<GameTableProps> = ({ games, date }) => {
               ? { homeTeam: game.homeTeam, awayTeam: game.awayTeam }
               : parseGameInfo(game.gameID);
             
+            // Get team info for basketball reference links
+            const homeTeamInfo = getTeamInfo(homeTeam);
+            const awayTeamInfo = getTeamInfo(awayTeam);
+            
             const { highest, lowest } = OddsService.findLines(game);
             
             return (
@@ -39,6 +51,40 @@ const GameTable: React.FC<GameTableProps> = ({ games, date }) => {
                 <td className="px-4 py-3">
                   <div className="font-medium">{homeTeam} vs {awayTeam}</div>
                   <div className="text-sm text-gray-600">{formatDate(game.gameDate)}</div>
+                </td>
+                <td className="px-4 py-3">
+                  <div className="flex flex-col space-y-2">
+                    {homeTeamInfo && (
+                      <div className="flex flex-wrap items-center gap-2">
+                        <span className="font-bold">{homeTeamInfo.code}</span>
+                        <div className="flex gap-2 text-xs">
+                          <a 
+                            href={`https://www.basketball-reference.com/teams/${homeTeamInfo.basketball_reference_code}/${currentYear}.html`}
+                            target="_blank" 
+                            rel="noopener noreferrer"
+                            className="text-blue-600 hover:underline"
+                          >
+                            Team Page
+                          </a>
+                        </div>
+                      </div>
+                    )}
+                    {awayTeamInfo && (
+                      <div className="flex flex-wrap items-center gap-2">
+                        <span className="font-bold">{awayTeamInfo.code}</span>
+                        <div className="flex gap-2 text-xs">
+                          <a 
+                            href={`https://www.basketball-reference.com/teams/${awayTeamInfo.basketball_reference_code}/${currentYear}.html`}
+                            target="_blank" 
+                            rel="noopener noreferrer"
+                            className="text-blue-600 hover:underline"
+                          >
+                            Team Page
+                          </a>
+                        </div>
+                      </div>
+                    )}
+                  </div>
                 </td>
                 <td className="px-4 py-3 text-center">
                   <div className="font-medium">{highest.value}</div>
