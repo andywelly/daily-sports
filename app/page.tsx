@@ -13,6 +13,7 @@ export default function Home() {
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
   const [currentDisplayDate, setCurrentDisplayDate] = useState<string>('');
+  const [showVideo, setShowVideo] = useState<boolean>(false);
 
   /**
    * Handle the API call to fetch NBA odds
@@ -37,7 +38,7 @@ export default function Home() {
       if (dateToFetch) {
         setDate(dateToFetch);
       }
-      console.log(response)
+      console.log(response);
     } catch (error) {
       console.error('Error fetching data:', error);
       
@@ -59,9 +60,41 @@ export default function Home() {
     fetchData(todayDate);
   };
 
+  /**
+   * Toggle video player visibility
+   */
+  const toggleVideo = () => {
+    setShowVideo(!showVideo);
+  };
+
   return (
     <div className="p-4 max-w-6xl mx-auto">
-      <h1 className="text-2xl font-bold mb-6">NBA Betting Odds</h1>
+      <h1 className="text-2xl font-bold mb-6">NBA</h1>
+
+      {/* Video Toggle Button */}
+      <div className="mb-6">
+        <button
+          onClick={toggleVideo}
+          className="bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded"
+        >
+          {showVideo ? 'Hide Game Stream' : 'Watch Utah Jazz vs Chicago Bulls'}
+        </button>
+      </div>
+      
+      {/* Video Player */}
+      {showVideo && (
+        <div className="mb-6 rounded overflow-hidden aspect-video w-full">
+          <iframe 
+            title="Utah Jazz vs Chicago Bulls Player" 
+            src="https://embedme.top/embed/alpha/utah-jazz-vs-chicago-bulls/1" 
+            allowFullScreen
+            allow="encrypted-media; picture-in-picture"
+            className="w-full h-full"
+            style={{ height: '400px' }}
+            frameBorder="0"
+          ></iframe>
+        </div>
+      )}
 
       <div className="flex flex-col md:flex-row gap-4 mb-6">
         {/* Date Input */}
