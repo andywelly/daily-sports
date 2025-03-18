@@ -82,7 +82,7 @@ export interface BookOdds {
     'Thunder': { code: 'OKC', basketball_reference_code: 'OKC', full_name: 'Oklahoma City Thunder' },
     'Magic': { code: 'ORL', basketball_reference_code: 'ORL', full_name: 'Orlando Magic' },
     '76ers': { code: 'PHI', basketball_reference_code: 'PHI', full_name: 'Philadelphia 76ers' },
-    'Suns': { code: 'PHX', basketball_reference_code: 'PHO', full_name: 'Phoenix Suns' },
+    'Suns': { code: 'PHO', basketball_reference_code: 'PHO', full_name: 'Phoenix Suns' },
     'Trail Blazers': { code: 'POR', basketball_reference_code: 'POR', full_name: 'Portland Trail Blazers' },
     'Kings': { code: 'SAC', basketball_reference_code: 'SAC', full_name: 'Sacramento Kings' },
     'Spurs': { code: 'SAS', basketball_reference_code: 'SAS', full_name: 'San Antonio Spurs' },
